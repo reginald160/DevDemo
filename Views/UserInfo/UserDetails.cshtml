@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DevDemo.Models.UserInfo>
+
+@{
+    ViewData["Title"] = "GetUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="alert alert-success alert-dismissible" style="margin-top:20px">
+    @ViewBag.Message
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TransNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fileUploads)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+
+                    @if (Model.Any())
+                    {
+
+                        @foreach (var doc in item.fileUploads)
+                        {
+                            <div>
+                    <img src="~/images/@doc.FileName" style="width: 18rem;" height="50"asp-append-version="true" alt="@doc.FileName"   > 
+                           </div>                                                        
+                            <div>
+                                <a asp-action="Download" asp-route-id="@doc.DocUploadId" target="_top" class="btn btn-success">Download</a>
+                            </div>
+                        }
+
+                    }
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>

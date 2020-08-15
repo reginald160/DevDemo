@@ -1,0 +1,35 @@
+﻿@model DevDemo.ViewModels.UserSearchViewModel
+
+@{
+    ViewData["Title"] = "GetUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<section class="container" style="width: 700px;">
+    <form asp-action="GetUser" asp-controller="UserInfo" method="post" class="form jumbotron">
+        <div class="form-row form-group">
+
+            <div class="col-md-12">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="TransNum" class="control-label"></label>
+                <input asp-for="TransNum" class="form-control" />
+                <span asp-validation-for="TransNum" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Submit" id="btn" class="btn btn-danger btn-block form-control">
+            </div>
+        </div>
+        
+    </form>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
